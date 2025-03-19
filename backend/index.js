@@ -13,7 +13,7 @@ mongoose
         useUnifiedTopology: true,
     })
     .then(() => console.log("✅ MongoDB Connected"))
-    .catch((err) => console.error("❌ MongoDB Connection Error:", err));
+    .catch((err) => console.error(" MongoDB Connection Error:", err));
 
 // Middleware
 app.use(express.json());
