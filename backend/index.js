@@ -43,14 +43,13 @@ app.get("/users", async(req, res) => {
 
 app.post("/create", async(req, res) => {
     try {
-        const { name, email, password, phone, portfolio } = req.body;
 
 
         if (await User.findOne({ email })) {
             return res.status(400).json({ message: "User with this email already exists" });
         }
 
-        const user = new User({ name, email, password, phone, portfolio });
+        const user = new User(req.body);
         await user.save();
         res.status(201).json({ message: "User created successfully", user });
     } catch (error) {
