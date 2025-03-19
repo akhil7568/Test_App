@@ -44,9 +44,7 @@ app.get("/users", async(req, res) => {
 app.post("/create", async(req, res) => {
     try {
         const { name, email, password, phone, portfolio } = req.body;
-        if (!name || !email || !password || !phone || !portfolio) {
-            return res.status(400).json({ message: "All fields are required!" });
-        }
+
 
         if (await User.findOne({ email })) {
             return res.status(400).json({ message: "User with this email already exists" });
