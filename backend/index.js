@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-
+app.use(express.json());
 dotenv.config();
 const app = express();
 
@@ -16,7 +16,7 @@ mongoose
     .catch((err) => console.error(" MongoDB Connection Error:", err));
 
 // Middleware
-app.use(express.json());
+
 
 // User Schema & Model
 const userSchema = new mongoose.Schema({
@@ -43,8 +43,6 @@ app.get("/users", async(req, res) => {
 
 app.post("/create", async(req, res) => {
     try {
-
-
         if (await User.findOne({ email })) {
             return res.status(400).json({ message: "User with this email already exists" });
         }
