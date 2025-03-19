@@ -5,29 +5,7 @@ app.use(express.json());
 dotenv.config();
 const app = express();
 
-// MongoDB Connection
-const mongoURI = process.env.MONGO_URI;
-mongoose
-    .connect(mongoURI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
-    .then(() => console.log("✅ MongoDB Connected"))
-    .catch((err) => console.error(" MongoDB Connection Error:", err));
 
-// Middleware
-
-
-// User Schema & Model
-const userSchema = new mongoose.Schema({
-    name: { type: String, required: true, maxLength: 50, trim: true, lowercase: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, minLength: 6, maxLength: 12, required: true },
-    phone: { type: String },
-    portfolio: { type: String },
-});
-
-const User = mongoose.model("User", userSchema);
 
 // Routes
 app.get("/", (req, res) => res.send("Hello, Server is Running!"));
