@@ -22,9 +22,7 @@ app.get("/users", async(req, res) => {
 
 app.post("/create", async(req, res) => {
     try {
-        if (await User.findOne({ email })) {
-            return res.status(400).json({ message: "User with this email already exists" });
-        }
+
 
         const user = new User(req.body);
         await user.save();
