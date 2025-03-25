@@ -1,11 +1,14 @@
 const express = require("express");
-const mongoose = require("mongoose");
+const db = require("./config/db");
 const dotenv = require("dotenv");
 const User = require('./models/userModel')
 const app = express();
-app.use(express.json());
+
 dotenv.config();
 
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 
 // Routes
@@ -21,9 +24,8 @@ app.get("/users", async(req, res) => {
 });
 
 app.post("/create", async(req, res) => {
+    console.log(req.body);
     try {
-
-
         const user = new User(req.body);
         await user.save();
         res.status(201).json({ message: "User created successfully", user });
@@ -53,5 +55,5 @@ app.delete("/delete/:id", async(req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 5051;
+const PORT = 4050;
 app.listen(PORT, () => console.log(`🚀 Server started on port ${PORT}`));
